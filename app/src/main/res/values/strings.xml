@@ -10,6 +10,8 @@
     <string name="roomQuestion">Room Question</string>
     <string name="roomCreate">Create Room</string>
     <string name="myrooms">My Rooms</string>
+    <string name="datepicker">Date</string>
+    <string name="timepicker">Time</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

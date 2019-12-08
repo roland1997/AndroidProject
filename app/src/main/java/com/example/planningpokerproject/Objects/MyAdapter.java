@@ -18,15 +18,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myViewHolder> {
 
     private Context context;
     private ArrayList<Question> questions;
+    private  OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
     public MyAdapter(Context c, ArrayList<Question> q){
         context = c;
         questions = q;
     }
 
+    public MyAdapter() {
+    }
+
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new myViewHolder(LayoutInflater.from(context).inflate(R.layout.questionview,parent,false));
+        return new myViewHolder(LayoutInflater.from(context).inflate(R.layout.questionview,parent,false),mListener);
     }
 
     @Override
@@ -47,11 +60,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.myViewHolder> {
     class myViewHolder extends RecyclerView.ViewHolder {
 
         TextView roomID,roomQuestion,roomPass;
-        public myViewHolder(@NonNull View itemView) {
+        public myViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             roomID = (TextView) itemView.findViewById(R.id.room_id);
             roomPass = (TextView) itemView.findViewById(R.id.room_pass);
             roomQuestion = (TextView) itemView.findViewById(R.id.room_question);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                if(listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
+                    }
+                }
+                }
+            });
         }
     }
 }
