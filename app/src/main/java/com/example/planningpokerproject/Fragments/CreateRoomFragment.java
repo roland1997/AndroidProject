@@ -46,7 +46,7 @@ public class CreateRoomFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_create_room, container, false);
         initialization(view);
         create();
-        int i=1;
+        int i=2;
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         listing = new ArrayList<Question>();
 
